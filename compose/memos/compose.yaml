@@ -1,0 +1,23 @@
+version: "3.3"
+services:
+  memos:
+    init: true
+    container_name: memos
+    #ports:
+    #  - 5230:5230
+    volumes:
+      - ~/.memos/:/var/opt/memos
+    image: neosmemo/memos:stable
+    networks:
+      - net
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.blog.rule=Host(`blog.docker.phonkd.net`)
+      - traefik.http.routers.blog.entryPoints=https
+      - traefik.http.routers.blog.tls=true
+      - traefik.http.routers.blog.tls.certresolver=cloudflare
+      - traefik.http.routers.blog.middlewares=authelia@docker
+      #- traefik.http.services.blog.loadBalancer.server.port=3000
+networks:
+  net:
+    external: true

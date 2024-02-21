@@ -1,0 +1,98 @@
+prometheus:
+  install: false
+gitlab-runner:
+  install: true
+  #certSecretName: fkcertificates
+  runners:
+    #certSecretName: fkcertificates
+    #rbac:
+     # create: true
+    privileged: true
+    config: |
+     [[runners]]
+      [runners.kubernetes]
+        image = "ubuntu:22.04"
+nginx-ingress:
+  controller:
+    replicaCount: 1
+    minAvailable: 0
+    resources:
+      requests:
+        cpu: 50m
+        memory: 100Mi
+redis:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 64Mi
+minio:
+  resources:
+    requests:
+      memory: 64Mi
+      cpu: 10m
+# Disable Rails bootsnap cache (temporary)
+global:
+  rails:
+    bootsnap:
+      enabled: false
+  ingress:
+    configureCertmanager: true
+    install: false
+
+
+# Reduce replica counts, reducing CPU & memory requirements
+gitlab:
+  webservice:
+    ingress:
+      tls:
+        secretName: gitlab-gitlab-tls
+  kas:
+    ingress:
+      tls:
+        secretName: gitlab-kas-tls
+    minReplicas: 1
+    resources:
+      limits:
+       memory: 1.5G
+      requests:
+        cpu: 100m
+        memory: 900M
+    workhorse:
+      resources:
+        limits:
+          memory: 100M
+        requests:
+          cpu: 10m
+          memory: 10M
+  sidekiq:
+    minReplicas: 1
+    resources:
+      limits:
+        memory: 1.5G
+      requests:
+        cpu: 50m
+        memory: 625M
+  gitlab-shell:
+    minReplicas: 1
+  toolbox:
+    enabled: false
+registry:
+  hpa:
+    minReplicas: 1
+  ingress:
+      tls:
+        secretName: gitlab-registry-tls
+    
+certmanager:
+  install: false
+
+# certmanager-issuer:
+#   email: bhonk1234@gmail.com
+#   server: https://acme-v02.api.letsencrypt.org/directory
+#   privateKeySecretRef:
+#     solvers:
+#     - dns01:
+#         cloudflare:
+#           apiTokenSecretRef:
+#             name: cloudflare-api-token-secret
+#             key: api-token

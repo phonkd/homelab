@@ -1,0 +1,61 @@
+version: "2"
+services:
+  db:
+    image: postgres:11
+    restart: always
+    networks:
+      - net
+    volumes:
+      - /data/nextcloud-db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=$NC_PG_PW
+      - POSTGRES_DB=nextcloud
+      - POSTGRES_USER=nextcloud
+  nextcloud:
+    image: nextcloud:27-apache
+    restart: always
+    networks:
+      - net
+    #ports:
+    #  - 8080:80
+    expose:
+      - "80"
+    links:
+      - db
+    volumes:
+      - /data/nextcloud-data:/var/www/html
+    depends_on:
+      - redis
+      - db
+    environment:
+      - POSTGRES_PASSWORD=$NC_PG_PW
+      - POSTGRES_DB=nextcloud
+      - POSTGRES_USER=nextcloud
+      - POSTGRES_HOST=db
+      - NEXTCLOUD_DOMAIN_NAME=nextcloud.phonkd.net
+      - OVERWRITEPROTOCOL=https
+      - OVERWRITECLIURL=https://nextcloud.phonkd.net
+      - OVERWRITEHOST=nextcloud.phonkd.net
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_HOST_PASSWORD=$NC_RD_PW
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.nextcloud.rule=Host(`nextcloud.phonkd.net`)
+      - traefik.http.routers.nextcloud.entryPoints=https
+      - traefik.http.routers.nextcloud.tls=true
+      - traefik.http.routers.nextcloud.tls.certresolver=cloudflare
+      - traefik.http.services.nextcloud.loadBalancer.server.port=80
+      - traefik.http.routers.nextcloud.middlewares=nextcloud-dav
+      - traefik.http.middlewares.nextcloud-dav.replacepathregex.regex=^/.well-known/ca(l|rd)dav
+      - traefik.http.middlewares.nextcloud-dav.replacepathregex.replacement=/remote.php/dav/
+  redis:
+    container_name: redis
+    image: redis
+    restart: unless-stopped
+    command: redis-server --requirepass 8hhcQbJtHJRaKgGCfAAhuy4BiNb
+    networks:
+      - net
+networks:
+  net:
+    external: true

@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    dns:
+      - '10.0.0.110' #pihole
+      - '10.0.0.1' # router
+    volumes:
+      - /data/nginx-proxy-manager/nginx-proxy-manager:/data
+      - /data/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
+# note: the /data directory is a disk added to the portainer vm
+# the directory was manually created `mkdir -p /data/nginx-proxy-manager/letsencrypt`
+# and `mkdir -p /data/nginx-proxy-manager/nginx-proxy-manager`

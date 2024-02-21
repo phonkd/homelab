@@ -1,0 +1,31 @@
+version: "3"
+services:
+  cmk:
+    networks:
+      - net
+    image: checkmk/check-mk-raw:2.2.0p17
+    container_name: cmk
+    #ports:
+    #traefik reglet- "8001:5000"
+    #traefik reglet- "8123:8000"
+    tmpfs:
+      - /opt/omd/sites/cmk/tmp:uid=1000,gid=1000
+    volumes:
+      - /data/cmk:/omd/sites
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.cmk.rule=Host(`cmk.docker.phonkd.net`)
+      - traefik.http.routers.cmk.entryPoints=https
+      - traefik.http.routers.cmk.tls=true
+      - traefik.http.routers.cmk.tls.certresolver=cloudflare
+      - traefik.http.routers.cmk.middlewares=authelia@docker
+      - traefik.http.services.cmk.loadBalancer.server.port=5000
+    expose:
+      - 5000
+volumes:
+  monitoring: null
+networks:
+  net:
+    external: true

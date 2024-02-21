@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  kuma:
+    networks:
+      - net
+    image: louislam/uptime-kuma:1
+    container_name: kuma
+    volumes:
+      - /data/kuma:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    #ports:
+    #  - 3001:3001 # <Host Port>:<Container Port>
+    restart: always
+    expose:
+      - "3001"
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.kuma.rule=Host(`kuma.docker.phonkd.net`)
+      - traefik.http.routers.kuma.entryPoints=https
+      - traefik.http.routers.kuma.tls=true
+      - traefik.http.routers.kuma.tls.certresolver=cloudflare
+      - traefik.http.routers.kuma.middlewares=authelia@docker
+      - traefik.http.services.kuma.loadBalancer.server.port=3001
+    #environment:
+    # UPTIME_KUMA_HOST: kuma.phonkd.net
+networks:
+  net:
+    external: true
