@@ -1,0 +1,52 @@
+version: "3"
+services:
+  meli:
+    image: getmeli/meli:beta
+    environment:
+      # no trailing slash !
+      MELI_URL: https://meli.phonkd.net
+      MELI_MONGO_URI: mongodb://mongo:27017/meli
+      # openssl rand -hex 32
+      MELI_JWT_SECRET: $MELI_JWTSECRET
+      # https://docs.meli.sh/authentication
+      MELI_USER: $MELI_USER
+      MELI_PASSWORD: $MELI_PW
+      MELI_GITEA_CLIENT_ID: $MELI_GITEA_CLIENTID
+      MELI_GITEA_CLIENT_SECRET: $MELI_GITEA_CLIENTSECRET
+      MELI_GITEA_URL: https://gitea.phonkd.net
+      # restrict access to your Gitea organizations
+      MELI_GITEA_ORGS: phonkdd"
+      MELI_HTTPS_AUTO: "false"
+    volumes:
+      - /data/meli-sites:/sites
+      - /data/meli-files:/files
+      - /data/meli-caddy/data:/data
+      - /data/meli-caddy/config:/config
+    depends_on:
+      - mongo
+    networks:
+      - net
+    labels:
+      #- traefik.http.routers.meli.rule=Host(`meli.phonkd.net`)
+      #- traefik.http.routers.meli.entryPoints=https
+      #- traefik.http.routers.meli.tls=true
+      #- traefik.http.routers.meli.tls.certresolver=cloudflare
+      #- traefik.http.routers.meli.middlewares=authelia@docker
+      #- traefik.http.services.meli.loadBalancer.server.port=3000
+      - traefik.enable=true
+      - traefik.http.services.meli.loadbalancer.server.port=80
+      - traefik.http.routers.meli.rule=HostRegexp(`meli.phonkd.net`,
+        `{subdomain:.+}.meli.phonkd.net`)
+      - traefik.http.routers.meli.tls.certresolver=cloudflare
+      - traefik.http.routers.meli.tls.domains[0].main=meli.phonkd.net
+      - traefik.http.routers.meli.tls.domains[0].sans=*.meli.phonkd.net
+  mongo:
+    image: mongo:4.2-bionic
+    restart: unless-stopped
+    networks:
+      - net
+    volumes:
+      - /data/meli-mongo:/data/db
+networks:
+  net:
+    external: true
