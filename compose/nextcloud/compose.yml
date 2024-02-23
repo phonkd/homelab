@@ -53,7 +53,7 @@ services:
     container_name: redis
     image: redis
     restart: unless-stopped
-    command: redis-server --requirepass 8hhcQbJtHJRaKgGCfAAhuy4BiNb
+    command: redis-server --requirepass $NC_RD_PW
     networks:
       - net
 networks:
