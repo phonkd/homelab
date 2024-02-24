@@ -2,23 +2,40 @@ version: "3.8"
 services:
   prometheus:
     image: prom/prometheus
-    ports:
-      - 9090:9090
+    #ports:
+    #  - 9090:9090
     volumes:
-      - /home/phonkd/git/portainer-services/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      #- /data/observability/prometheus/data:/prometheus
+      - /home/phonkd/git/homelab/compose/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - /data/prometheus-data/:/prometheus
     restart: unless-stopped
     expose:
       - "9090"
     networks:
       - net
-    #labels:
-      #- traefik.enable=true
-      #- traefik.http.routers.prom.rule=Host(`prom.docker.phonkd.net`)
-      #- traefik.http.routers.prom.entryPoints=https
-      #- traefik.http.routers.prom.tls=true
-      #- traefik.http.routers.prom.tls.certresolver=cloudflare
-      #- traefik.http.services.dashboard.loadBalancer.server.port=9090
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.prom.rule=Host(`prom.docker.phonkd.net`)
+      - traefik.http.routers.prom.entryPoints=https
+      - traefik.http.routers.prom.tls=true
+      - traefik.http.routers.prom.tls.certresolver=cloudflare
+      - traefik.http.services.dashboard.loadBalancer.server.port=9090
+  grafana:
+    image: grafana/grafana
+    #ports:
+    #  - 3000:3000
+    volumes:
+      - /data/grafana-data:/var/lib/grafana
+      - /data/secrets/grafana/grafana.ini:/etc/grafana/grafana.ini
+    restart: unless-stopped
+    networks:
+      - net
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.graf.rule=Host(`grafana.docker.phonkd.net`)
+      - traefik.http.routers.graf.entryPoints=https
+      - traefik.http.routers.graf.tls=true
+      - traefik.http.routers.graf.tls.certresolver=cloudflare
+      - traefik.http.services.graf.loadBalancer.server.port=3000
 networks:
   net:
     external: true

@@ -1,0 +1,11 @@
+version: "3.3"
+services:
+  pihole-exporter:
+    environment:
+      - PIHOLE_HOSTNAME=$piholehostname
+      - PIHOLE_PASSWORD=$piholepassword
+      - PORT=9617
+    ports:
+      - 9617:9617
+    image: ekofr/pihole-exporter:latest
+networks: {}

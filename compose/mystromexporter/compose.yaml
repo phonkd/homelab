@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  mystromexporter:
+    image: ghcr.io/peschmae/exporter-go-mystrom:main
+    restart: unless-stopped
+    expose:
+      - "9452"
+    ports:
+      - 9452:9452
+    networks:
+      - net
+networks:
+  net:
+    external: true

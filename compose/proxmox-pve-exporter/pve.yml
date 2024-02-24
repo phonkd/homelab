@@ -1,0 +1,5 @@
+default:
+    user: prometheus3@pve
+    #token_name: "prometheus"
+    password: "pve-password-changeme"
+    verify_ssl: false
