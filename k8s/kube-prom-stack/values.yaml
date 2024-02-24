@@ -11,6 +11,7 @@ grafana:
     - secretName: cloudflare-api-token-secret
       hosts:
       - grafana.phonkd.net
+  defaultDashboardsEnabled: false
   persistence:
    type: pvc
    enabled: true
@@ -28,6 +29,13 @@ prometheus:
       hosts:
         - prometheus.phonkd.net
       #   - domain.com/prometheus
+  persistence:
+    type: pvc
+    enabled: true
+    storageClassName: longhorn
+    accessModes: ReadWriteOnce
+    size: 20Gi
+
       
   additionalScrapeConfigsSecret:
     enabled: true

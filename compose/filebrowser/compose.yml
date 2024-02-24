@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  filebrowser:
+    image: hurlenko/filebrowser
+    user: "${UID}:${GID}"
+    ports:
+      - 443:8080
+    volumes:
+      - /data/filebrowser:/data
+      - /data/filebrowser-config:/config
+    environment:
+      - fb.phonkd.net=/filebrowser
+    - traefik.enable=true
+      - traefik.http.routers.fb.rule=Host(`fb.phonkd.net`)
+      - traefik.http.routers.fb.entryPoints=https
+      - traefik.http.routers.fb.tls=true
+      - traefik.http.routers.fb.tls.certresolver=cloudflare
+      - traefik.http.routers.fb.middlewares=authelia@docker
+    restart: always
