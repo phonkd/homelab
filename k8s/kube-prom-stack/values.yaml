@@ -3,12 +3,16 @@ grafana:
   adminPassword: prom-operator
   ingress:
     enabled: true
+    ingressClassName: nginx
+    hosts:
+      - grafana.phonkd.net
     annotations:
       kubernetes.io/ingress.class: nginx
-    hosts: ['grafana.phonkd.net']
-    path: "/"
+      #kubernetes.io/tls-acme: "true"
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+    path: /
     tls:
-    - secretName: cloudflare-api-token-secret
+    - secretName: nginx-tls-secret
       hosts:
       - grafana.phonkd.net
   defaultDashboardsEnabled: false
@@ -19,9 +23,6 @@ grafana:
    accessModes:
     - ReadWriteOnce
    size: 10Gi
-  # annotations: {}
-   finalizers:
-    - kubernetes.io/pvc-protection
 prometheus:
   ingress:
       ingressClassName: nginx
@@ -29,11 +30,10 @@ prometheus:
       hosts:
         - prometheus.phonkd.net
       #   - domain.com/prometheus
-  persistence:
-    type: pvc
-    enabled: true
-    storageClassName: longhorn
-    accessModes: ReadWriteOnce
+  server:
+    persistentVolume:
+      enabled: true
+    storageClass: longhorn
     size: 20Gi
 
       
