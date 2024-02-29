@@ -3,10 +3,14 @@ services:
     image: ghcr.io/toeverything/affine-graphql:stable
     container_name: affine_selfhosted
     command:
-      ['sh', '-c', 'node ./scripts/self-host-predeploy && node ./dist/index.js']
-    ports:
+      - sh
+      - -c
+      - node ./scripts/self-host-predeploy && node ./dist/index.js
+      #ports: null
       #- '3010:3010'
       # - '5555:5555'
+    expose:
+      - "3010"
     depends_on:
       redis:
         condition: service_healthy
@@ -15,42 +19,63 @@ services:
     volumes:
       # custom configurations
       - /data/affine-app_config:/root/.affine/config
-      # blob storage
       - /data/affine-app_storage:/root/.affine/storage
     restart: unless-stopped
     environment:
       - NODE_OPTIONS="--import=./scripts/register.js"
       - AFFINE_CONFIG_PATH=/root/.affine/config
       - REDIS_SERVER_HOST=redis
-      - DATABASE_URL=postgres://affine:affine@postgres:5432/affine
+      - DATABASE_URL=postgres://affine:8msENjbAvQ8NhtBMUs6JBdvS@postgres:5432/affine
       - NODE_ENV=production
       - AFFINE_ADMIN_EMAIL=$AFFINE_A_EMAIL
       - AFFINE_ADMIN_PASSWORD=$AFFINE_A_PW
+    networks:
+      - net
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.affine.rule=Host(`affine.docker.phonkd.net`)
+      - traefik.http.routers.affine.entryPoints=https
+      - traefik.http.routers.affine.tls=true
+      - traefik.http.routers.affine.tls.certresolver=cloudflare
+      - traefik.http.services.affine.loadBalancer.server.port=3010
   redis:
+    networks:
+      - net
     image: redis
     container_name: affine_redis
     restart: unless-stopped
     volumes:
       - /data/affine-redis:/data
     healthcheck:
-      test: ['CMD', 'redis-cli', '--raw', 'incr', 'ping']
+      test:
+        - CMD
+        - redis-cli
+        - --raw
+        - incr
+        - ping
       interval: 10s
       timeout: 5s
       retries: 5
   postgres:
+    networks:
+      - net
     image: postgres
     container_name: affine_postgres
     restart: unless-stopped
     volumes:
       - /data/affine-postgres:/var/lib/postgresql/data
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U affine']
+      test:
+        - CMD-SHELL
+        - pg_isready -U affine
       interval: 10s
       timeout: 5s
       retries: 5
     environment:
-      POSTGRES_USER=$AFFINE_PG_USER
-      POSTGRES_PASSWORD=$AFFINE_PG_PW
-      POSTGRES_DB=affine
-      PGDATA=/var/lib/postgresql/data/pgdata
-
+      - POSTGRES_USER=$AFFINE_PG_USER
+      - POSTGRES_PASSWORD=$AFFINE_PG_PW
+      - POSTGRES_DB=affine
+      - PGDATA=/var/lib/postgresql/data/pgdata
+networks:
+  net:
+    external: true
