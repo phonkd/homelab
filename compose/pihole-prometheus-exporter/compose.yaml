@@ -8,4 +8,5 @@ services:
     ports:
       - 9617:9617
     image: ekofr/pihole-exporter:latest
+    restart: always
 networks: {}

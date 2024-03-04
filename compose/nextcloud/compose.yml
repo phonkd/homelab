@@ -16,14 +16,15 @@ services:
     restart: always
     networks:
       - net
-    #ports:
-    #  - 8080:80
+    ports:
+      - 8080:80
     expose:
       - "80"
     links:
       - db
     volumes:
       - /data/nextcloud-data:/var/www/html
+      - /home/phonkd/git/homelab/compose/nextcloud/nextcloud-file-upload-fix.conf:/etc/apache2/conf-enabled/nextcloud-apache.conf:ro
     depends_on:
       - redis
       - db
@@ -33,9 +34,6 @@ services:
       - POSTGRES_USER=nextcloud
       - POSTGRES_HOST=db
       - NEXTCLOUD_DOMAIN_NAME=nextcloud.phonkd.net
-      - OVERWRITEPROTOCOL=https
-      - OVERWRITECLIURL=https://nextcloud.phonkd.net
-      - OVERWRITEHOST=nextcloud.phonkd.net
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - REDIS_HOST_PASSWORD=$NC_RD_PW
