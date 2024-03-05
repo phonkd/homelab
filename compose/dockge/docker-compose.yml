@@ -22,6 +22,8 @@ services:
       - traefik.http.routers.dockge.tls.certresolver=cloudflare
       - traefik.http.routers.dockge.middlewares=authelia@docker
       - traefik.http.services.dockge.loadBalancer.server.port=5001
+      - traefik.http.routers.dockge.middlewares=ip-whitelist@docker
+      - traefik.http.middlewares.ip-whitelist.ipwhitelist.sourcerange=127.0.0.1/32, 192.168.1.0/24, 92.106.79.2
     environment:
       # Tell Dockge where to find the stacks
       - DOCKGE_STACKS_DIR=/opt/stacks

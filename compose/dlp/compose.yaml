@@ -17,6 +17,8 @@ services:
       - traefik.http.routers.dlp.tls=true
       - traefik.http.routers.dlp.tls.certresolver=cloudflare
       - traefik.http.services.dlp.loadBalancer.server.port=8081
+      - traefik.http.routers.dlp.middlewares=ip-whitelist@docker
+      - traefik.http.middlewares.ip-whitelist.ipwhitelist.sourcerange=127.0.0.1/32, 192.168.1.0/24, 92.106.79.2
 networks:
   net:
     external: true

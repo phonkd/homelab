@@ -19,6 +19,9 @@ services:
       - traefik.http.routers.prom.tls=true
       - traefik.http.routers.prom.tls.certresolver=cloudflare
       - traefik.http.services.dashboard.loadBalancer.server.port=9090
+      - traefik.http.routers.prom.middlewares=ip-whitelist@docker
+      - traefik.http.middlewares.ip-whitelist-int.ipwhitelist.sourcerange=127.0.0.1/32,
+        192.168.1.0/24, 92.106.79.2, 10.0.0.0/24
   grafana:
     image: grafana/grafana
     #ports:
@@ -36,6 +39,9 @@ services:
       - traefik.http.routers.graf.tls=true
       - traefik.http.routers.graf.tls.certresolver=cloudflare
       - traefik.http.services.graf.loadBalancer.server.port=3000
+      - traefik.http.routers.graf.middlewares=ip-whitelist@docker
+      - traefik.http.middlewares.ip-whitelist-int.ipwhitelist.sourcerange=127.0.0.1/32,
+        192.168.1.0/24, 92.106.79.2, 10.0.0.0/24
 networks:
   net:
     external: true

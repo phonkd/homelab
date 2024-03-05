@@ -37,8 +37,7 @@ services:
       - --entryPoints.https.proxyProtocol.trustedIPs=10.0.0.0/8,172.16.0.0/16,192.168.0.0/16,fc00::/7
       - --entryPoints.https.forwardedHeaders.insecure=false
       - --entryPoints.https.proxyProtocol.insecure=false
-      - --entryPoints.http.http.redirections.entryPoint.to=443 ## Forbidden line to fix 8443
-      #- '--entrypoints.http.http.redirections.entryPoint.to=:443'
+      - --entryPoints.http.http.redirections.entryPoint.to=443 ## Forbidden line to fix 844
     environment:
       - CF_API_EMAIL=$CF_APIMAIL
       - CF_DNS_API_TOKEN=$CF_DNS_APITOKEN
@@ -83,3 +82,6 @@ services:
       - traefik.http.middlewares.authelia-basic.forwardAuth.address=http://authelia:9091/api/verify?auth=basic
       - traefik.http.middlewares.authelia-basic.forwardAuth.trustForwardHeader=true
       - traefik.http.middlewares.authelia-basic.forwardAuth.authResponseHeaders=Remote-User,Remote-Groups,Remote-Name,Remote-Email
+      - traefik.http.routers.authelia.middlewares=ip-whitelist@docker
+      - traefik.http.middlewares.ip-whitelist.ipwhitelist.sourcerange=127.0.0.1/32,
+        192.168.1.0/24, 92.106.79.2
