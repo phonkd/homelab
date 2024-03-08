@@ -26,7 +26,7 @@ services:
       - /data/nextcloud-data:/var/www/html
       - /home/phonkd/git/homelab/compose/nextcloud/nextcloud-file-upload-fix.conf:/etc/apache2/conf-enabled/nextcloud-apache.conf:ro
     depends_on:
-      - redis
+      - nextcloud-redis
       - db
     environment:
       - POSTGRES_PASSWORD=$NC_PG_PW
@@ -34,7 +34,7 @@ services:
       - POSTGRES_USER=nextcloud
       - POSTGRES_HOST=db
       - NEXTCLOUD_DOMAIN_NAME=nextcloud.phonkd.net
-      - REDIS_HOST=redis
+      - REDIS_HOST=nextcloud-redis
       - REDIS_PORT=6379
       - REDIS_HOST_PASSWORD=$NC_RD_PW
     labels:
@@ -47,8 +47,8 @@ services:
       - traefik.http.routers.nextcloud.middlewares=nextcloud-dav
       - traefik.http.middlewares.nextcloud-dav.replacepathregex.regex=^/.well-known/ca(l|rd)dav
       - traefik.http.middlewares.nextcloud-dav.replacepathregex.replacement=/remote.php/dav/
-  redis:
-    container_name: redis
+  nextcloud-redis:
+    container_name: nextcloud-redis
     image: redis
     restart: unless-stopped
     command: redis-server --requirepass $NC_RD_PW

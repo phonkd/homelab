@@ -1,3 +1,4 @@
+version: "3.8"
 services:
   affine:
     image: ghcr.io/toeverything/affine-graphql:stable
@@ -12,7 +13,7 @@ services:
     expose:
       - "3010"
     depends_on:
-      redis:
+      affine_redis:
         condition: service_healthy
       postgres:
         condition: service_healthy
@@ -24,23 +25,29 @@ services:
     environment:
       - NODE_OPTIONS="--import=./scripts/register.js"
       - AFFINE_CONFIG_PATH=/root/.affine/config
-      - REDIS_SERVER_HOST=redis
-      - DATABASE_URL=postgres://affine:8msENjbAvQ8NhtBMUs6JBdvS@postgres:5432/affine
+      - REDIS_SERVER_HOST=affine_redis
+      - DATABASE_URL=postgres://affine:${AFFINE_A_PW}@postgres:5432/affine
       - NODE_ENV=production
       - AFFINE_ADMIN_EMAIL=$AFFINE_A_EMAIL
       - AFFINE_ADMIN_PASSWORD=$AFFINE_A_PW
+      - AFFINE_SERVER_HOST=affine.phonkd.net
+      - AFFINE_SERVER_HTTPS=true
+      - MAILER_HOST=$MAILER_HOST
+      - MAILER_PORT=587
+      - MAILER_USER=$MAILER_USER
+      - MAILER_PASSWORD=$MAILER_PASSWORD
     networks:
-      - net
+      - net-affine
     labels:
       - traefik.enable=true
-      - traefik.http.routers.affine.rule=Host(`affine.docker.phonkd.net`)
+      - traefik.http.routers.affine.rule=Host(`affine.phonkd.net`)
       - traefik.http.routers.affine.entryPoints=https
       - traefik.http.routers.affine.tls=true
       - traefik.http.routers.affine.tls.certresolver=cloudflare
       - traefik.http.services.affine.loadBalancer.server.port=3010
-  redis:
+  affine_redis:
     networks:
-      - net
+      - net-affine
     image: redis
     container_name: affine_redis
     restart: unless-stopped
@@ -58,7 +65,7 @@ services:
       retries: 5
   postgres:
     networks:
-      - net
+      - net-affine
     image: postgres
     container_name: affine_postgres
     restart: unless-stopped
@@ -77,5 +84,5 @@ services:
       - POSTGRES_DB=affine
       - PGDATA=/var/lib/postgresql/data/pgdata
 networks:
-  net:
-    external: true
+  net-affine:
+    name: net-affine

@@ -3,6 +3,8 @@ networks:
   net:
     driver: bridge
     name: net
+  net-affine:
+    external: true
 services:
   traefik:
     container_name: traefik
@@ -43,6 +45,7 @@ services:
       - CF_DNS_API_TOKEN=$CF_DNS_APITOKEN
     networks:
       net: {}
+      net-affine: null
     ports:
       - 80:8080
       - 443:8443
@@ -64,6 +67,7 @@ services:
     restart: unless-stopped
     networks:
       net: {}
+      net-affine:
     expose:
       - 9091
     volumes:

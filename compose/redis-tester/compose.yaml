@@ -1,0 +1,10 @@
+version: "3.3"
+services:
+  redis-stack:
+    container_name: redis-stack
+    image: redis/redis-stack:latest
+    networks:
+      - net
+networks:
+  net:
+    external: true
