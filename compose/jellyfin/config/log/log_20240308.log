@@ -141,3 +141,29 @@ System.ArgumentException: Not enough valid pictures provided to create a splashs
    at Emby.Server.Implementations.Library.LibraryManager.RunPostScanTasks(IProgress`1 progress, CancellationToken cancellationToken)
 [2024-03-08 08:58:40.128 +00:00] [INF] [26] Emby.Server.Implementations.ScheduledTasks.TaskManager: "Scan Media Library" Completed after 0 minute(s) and 4 seconds
 [2024-03-08 08:58:40.129 +00:00] [INF] [26] Emby.Server.Implementations.ScheduledTasks.TaskManager: ExecuteQueuedTasks
+[2024-03-08 12:08:16.057 +00:00] [INF] [2] Main: Received a SIGTERM signal, shutting down
+[2024-03-08 12:08:16.058 +00:00] [INF] [2] Main: Running query planner optimizations in the database... This might take a while
+[2024-03-08 12:08:16.122 +00:00] [INF] [2] Emby.Server.Implementations.ApplicationHost: Disposing "CoreAppHost"
+[2024-03-08 12:08:16.123 +00:00] [INF] [2] Emby.Server.Implementations.ApplicationHost: Disposing "EntryPoint"
+[2024-03-08 12:08:16.124 +00:00] [INF] [2] Emby.Server.Implementations.ApplicationHost: Disposing "EntryPoint"
+[2024-03-08 12:08:16.124 +00:00] [INF] [2] Emby.Server.Implementations.ApplicationHost: Disposing "UserDataChangeNotifier"
+[2024-03-08 12:08:16.125 +00:00] [INF] [2] Emby.Server.Implementations.ApplicationHost: Disposing "MusicBrainzAlbumProvider"
+[2024-03-08 12:08:16.125 +00:00] [INF] [2] Emby.Server.Implementations.ApplicationHost: Disposing "ExternalPortForwarding"
+[2024-03-08 12:08:16.126 +00:00] [INF] [2] Emby.Server.Implementations.EntryPoints.ExternalPortForwarding: Stopping NAT discovery
+[2024-03-08 12:08:16.130 +00:00] [INF] [2] Emby.Server.Implementations.ApplicationHost: Disposing "LibraryChangedNotifier"
+[2024-03-08 12:08:16.132 +00:00] [INF] [2] Emby.Server.Implementations.ApplicationHost: Disposing "RecordingNotifier"
+[2024-03-08 12:08:16.133 +00:00] [INF] [2] Emby.Server.Implementations.ApplicationHost: Disposing "DeviceAccessEntryPoint"
+[2024-03-08 12:08:16.134 +00:00] [INF] [2] Emby.Server.Implementations.ApplicationHost: Disposing "SchedulesDirect"
+[2024-03-08 12:08:16.134 +00:00] [INF] [2] Emby.Server.Implementations.ApplicationHost: Disposing "EmbyTV"
+[2024-03-08 12:08:16.135 +00:00] [INF] [2] Emby.Server.Implementations.ApplicationHost: Disposing "NotificationEntryPoint"
+[2024-03-08 12:08:16.136 +00:00] [INF] [2] Emby.Server.Implementations.ApplicationHost: Disposing "LibraryMonitorStartup"
+[2024-03-08 12:08:16.136 +00:00] [INF] [2] Emby.Server.Implementations.ApplicationHost: Disposing "UdpServerEntryPoint"
+[2024-03-08 12:08:16.137 +00:00] [INF] [2] Emby.Server.Implementations.ApplicationHost: Disposing "DlnaEntryPoint"
+[2024-03-08 12:08:16.138 +00:00] [INF] [2] Emby.Dlna.Main.DlnaEntryPoint: Disposing PlayToManager
+[2024-03-08 12:08:16.139 +00:00] [INF] [2] Emby.Dlna.Main.DlnaEntryPoint: Disposing DeviceDiscovery
+[2024-03-08 12:08:16.140 +00:00] [INF] [2] Emby.Dlna.Main.DlnaEntryPoint: Disposing SsdpCommunicationsServer
+[2024-03-08 12:08:16.140 +00:00] [INF] [2] Emby.Dlna.Main.DlnaEntryPoint: "SsdpCommunicationsServer" disposing _BroadcastListenSocket
+[2024-03-08 12:08:16.142 +00:00] [INF] [2] Emby.Dlna.Main.DlnaEntryPoint: "SsdpCommunicationsServer" Disposing 3 sendSockets
+[2024-03-08 12:08:16.143 +00:00] [INF] [2] Emby.Dlna.Main.DlnaEntryPoint: "SsdpCommunicationsServer" disposing sendSocket from "0.0.0.0"
+[2024-03-08 12:08:16.143 +00:00] [INF] [2] Emby.Dlna.Main.DlnaEntryPoint: "SsdpCommunicationsServer" disposing sendSocket from "172.18.0.9"
+[2024-03-08 12:08:16.143 +00:00] [INF] [2] Emby.Dlna.Main.DlnaEntryPoint: "SsdpCommunicationsServer" disposing sendSocket from "127.0.0.1"

@@ -6,7 +6,7 @@ services:
     #user: uid:gid
     #network_mode: 'host'
     volumes:
-      - /home/phonkd/git/homelab/compose/jellyfin/config:/config
+      - /data/jellyfin-config:/config
       - /data/nextcloud-data/data/phonkd/files/jellyfin:/media:ro
       #- /path/to/media2:/media2:ro
     restart: unless-stopped
@@ -23,7 +23,8 @@ services:
       - traefik.http.routers.jf.tls.certresolver=cloudflare
       - traefik.http.services.jf.loadBalancer.server.port=8096
       - traefik.http.routers.jf.middlewares=ip-whitelist@docker
-      - traefik.http.middlewares.ip-whitelist.ipwhitelist.sourcerange=127.0.0.1/32, 192.168.1.0/24, 92.106.79.2
+      - traefik.http.middlewares.ip-whitelist.ipwhitelist.sourcerange=127.0.0.1/32,
+        192.168.1.0/24, 92.106.79.2
 networks:
   net:
     external: true
