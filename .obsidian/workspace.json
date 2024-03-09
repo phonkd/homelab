@@ -1,0 +1,176 @@
+{
+  "main": {
+    "id": "23e42e85ce20213b",
+    "type": "split",
+    "children": [
+      {
+        "id": "77abf54a9c119ed5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8d750dc894399575",
+            "type": "leaf",
+            "state": {
+              "type": "canvas",
+              "state": {
+                "file": "docs/security/Desired-path.canvas",
+                "viewState": {
+                  "x": 395,
+                  "y": 103.20000000000002,
+                  "zoom": 0
+                }
+              }
+            }
+          },
+          {
+            "id": "86c2d0ffa7174595",
+            "type": "leaf",
+            "state": {
+              "type": "canvas",
+              "state": {
+                "file": "docs/security/Desired-path.canvas",
+                "viewState": {
+                  "x": 65.5,
+                  "y": -210,
+                  "zoom": 0
+                }
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "63eec5ce9ed81d86",
+    "type": "split",
+    "children": [
+      {
+        "id": "dfe060f1aaa7083e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "23b6466573d867cc",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "454eac111a389ea4",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "d7c4c1a291ab2822",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "6938e13fcafc4382",
+    "type": "split",
+    "children": [
+      {
+        "id": "77cd6ee934ae63d5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "27ebb28b20cf2053",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "docs/security/Desired-path.canvas",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "ca067dbe70922aa4",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "docs/security/Desired-path.canvas",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "79a5738794a0d10b",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "f52e470418ee8343",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "docs/security/Desired-path.canvas"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "8d750dc894399575",
+  "lastOpenFiles": [
+    "docs/security/Securing my homelab.md",
+    "Pasted image 20240306003204.png",
+    "docs/security/Desired-path.canvas",
+    "Pasted image 20240306002055.png",
+    "docs/security",
+    "docs"
+  ]
+}
