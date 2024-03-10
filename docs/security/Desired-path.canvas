@@ -1,0 +1,32 @@
+{
+	"nodes":[
+		{"id":"22051d1823f4472d","type":"text","text":"Swiscom Box","x":-60,"y":-280,"width":250,"height":60,"color":"1"},
+		{"id":"9af783ab7fd43378","type":"text","text":"Traefik","x":-60,"y":-80,"width":250,"height":60,"color":"5"},
+		{"id":"ee9b6d4dfa09b70a","type":"text","text":"pfsense","x":-60,"y":-180,"width":250,"height":60,"color":"#1100ff"},
+		{"id":"333a7996df60c3c0","type":"text","text":"Cloudflare","x":-60,"y":-400,"width":250,"height":60,"color":"2"},
+		{"id":"b55dce6f081822d2","type":"text","text":"Client","x":3,"y":-560,"width":125,"height":50,"color":"3"},
+		{"id":"3dfb9348d70855db","type":"text","text":"Nextcloud","x":-59,"y":80,"width":250,"height":60,"color":"6"},
+		{"id":"5be114affdcdfb10","type":"text","text":"Swiscom Box","x":460,"y":-280,"width":250,"height":60,"color":"1"},
+		{"id":"873d80c660fc86b8","type":"text","text":"Traefik","x":460,"y":-80,"width":250,"height":60,"color":"5"},
+		{"id":"038b8ce15139ffb4","type":"text","text":"pfsense","x":460,"y":-180,"width":250,"height":60,"color":"#1100ff"},
+		{"id":"6278ff2f0b949a27","type":"text","text":"Cloudflare","x":460,"y":-400,"width":250,"height":60,"color":"2"},
+		{"id":"2e538c1f3bfc8708","type":"text","text":"Client","x":523,"y":-560,"width":125,"height":50},
+		{"id":"41a814d1abac136e","type":"text","text":"Traefik ipwhitelist middleware checks ips","x":479,"y":63,"width":212,"height":95,"color":"5"},
+		{"id":"45b3856d1009e231","type":"text","text":"Nextcloud","x":335,"y":260,"width":250,"height":60,"color":"4"},
+		{"id":"e20caa896c4201ac","type":"text","text":"Other denied service","x":600,"y":260,"width":250,"height":60,"color":"1"}
+	],
+	"edges":[
+		{"id":"f3e71a840fd4c381","fromNode":"b55dce6f081822d2","fromSide":"bottom","toNode":"333a7996df60c3c0","toSide":"top"},
+		{"id":"aeac03de48968d3c","fromNode":"333a7996df60c3c0","fromSide":"bottom","toNode":"22051d1823f4472d","toSide":"top"},
+		{"id":"155f37a887b2bca9","fromNode":"22051d1823f4472d","fromSide":"bottom","toNode":"ee9b6d4dfa09b70a","toSide":"top"},
+		{"id":"3a460851947824be","fromNode":"ee9b6d4dfa09b70a","fromSide":"bottom","toNode":"9af783ab7fd43378","toSide":"top"},
+		{"id":"7a7a365c01c60329","fromNode":"9af783ab7fd43378","fromSide":"bottom","toNode":"3dfb9348d70855db","toSide":"top","label":"Via host header"},
+		{"id":"0245264061ba264a","fromNode":"5be114affdcdfb10","fromSide":"bottom","toNode":"038b8ce15139ffb4","toSide":"top"},
+		{"id":"e2998965bb226a20","fromNode":"6278ff2f0b949a27","fromSide":"bottom","toNode":"5be114affdcdfb10","toSide":"top"},
+		{"id":"608922668e76bd99","fromNode":"038b8ce15139ffb4","fromSide":"bottom","toNode":"873d80c660fc86b8","toSide":"top"},
+		{"id":"aa6fde9b1c8b23f6","fromNode":"2e538c1f3bfc8708","fromSide":"bottom","toNode":"6278ff2f0b949a27","toSide":"top"},
+		{"id":"e61dd808abec6664","fromNode":"873d80c660fc86b8","fromSide":"bottom","toNode":"41a814d1abac136e","toSide":"top"},
+		{"id":"d293a82bd2fb9655","fromNode":"41a814d1abac136e","fromSide":"bottom","toNode":"45b3856d1009e231","toSide":"top","color":"4","label":"success"},
+		{"id":"6ca7b47ac5619c71","fromNode":"41a814d1abac136e","fromSide":"bottom","toNode":"e20caa896c4201ac","toSide":"top","color":"1","label":"403"}
+	]
+}
