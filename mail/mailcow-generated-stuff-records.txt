@@ -1,0 +1,2 @@
+_dmarc	IN	TXT	v=DMARC1;p=quarantine;rua=mailto:admin@phonkd.net.;ruf=mailto:admin@phonkd.net.;sp=quarantine
+dkim._domainkey	IN	TXT	v=DKIM1;k=rsa;t=s;s=email;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAumyWhnDmzWfjfiNgb2bmagjGtgu5wDDzhdRftdPqe0s3D56DM1zizFke0xM0CWJAGFwClgfurUoINEtXc/sV/EOLOh/IiOo23YP9yWNguhUVqvlOaWw9JJ4fO0qYnTpCWnZc9y2yTGODNpQ4aU6E0b/01/HY+FZMGir6G3CB2DnzQOmDFDcw1T8iJnYdAzLDolHl/wDFTk5DoIhBiLz5HB92SIbHRJEbnbPfe7exd99AnIMKHPbHg6BgixEjvDf3sLHg3CaTWrOmL8Af80pUBj4p1C7/oqxTYJ5OH2k0uQ60QiH93pC+wpe8tr2UCjgLl3NisIgQ06skN5xiFay8KQIDAQAB

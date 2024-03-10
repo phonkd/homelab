@@ -6,12 +6,9 @@ metadata:
   labels:
     usecase: minecraft
 spec:
-  storageClassName: nfs
+  storageClassName: proxmox-data
   capacity:
-    storage: 100Gi
+    storage: 10Gi
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  nfs:
-    path: /nfs/minecraft_server
-    server: 192.168.1.136

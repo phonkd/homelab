@@ -1,0 +1,13 @@
+phonkd.net                   IN TXT     "v=spf1 a mx ipv4:95.217.160.80 -all"
+_dmarc.phonkd.net.    1    IN    TXT    "v=DMARC1; p=quarantine; rua=mailto:admin@phonkd.net; ruf=mailto:admin@phonkd.net; sp=quarantine"
+;; SRV Records
+_autodiscover._tcp.phonkd.net.    1    IN    SRV    0 1 443 mail.phonkd.net.
+_caldavs._tcp._tcp.phonkd.net.    1    IN    SRV    0 1 443 mail.phonkd.net.
+_carddavs._tcp._tcp.phonkd.net.    1    IN    SRV    0 1 443 mail.phonkd.net.
+_imaps._tcp._tcp.phonkd.net.    1    IN    SRV    0 1 443 mail.phonkd.net.
+_imap._tcp._tcp.phonkd.net.    1    IN    SRV    0 1 443 mail.phonkd.net.
+_sieve._tcp._tcp.phonkd.net.    1    IN    SRV    0 1 4190 mail.phonkd.net.
+_smtps._tcp._tcp.phonkd.net.    1    IN    SRV    0 1 465 mail.phonkd.net.
+_submission._tcp._tcp.phonkd.net.    1    IN    SRV    0 1 587 mail.phonkd.net.
+
+

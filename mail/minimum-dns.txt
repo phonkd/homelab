@@ -1,0 +1,4 @@
+mail                IN A       95.217.160.80
+autodiscover        IN CNAME   mail.phonkd.net.
+autoconfig          IN CNAME   mail.phonkd.net.
+@                   IN MX 10   mail.phonkd.net.
